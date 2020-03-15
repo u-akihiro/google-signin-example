@@ -1,35 +1,46 @@
 <html>
-    <head>
-        <meta name="google-signin-client_id" content="602562454170-huurfbbondbilqamck6a1j0ptcf5b16h.apps.googleusercontent.com">
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script>
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                const token = googleUser.getAuthResponse().id_token;
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('ID Token: ' + token);
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-                
-                const data = new FormData;
-                data.append('token', token)
-                fetch('/verify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: data
-                }).then((response) => {
-                    return response.json();
-                }).then((data) => {
-                    console.log(data);
-                }).catch(error => console.error(error));
-            }
-        </script>
-    </head>
-    <body>
+<head>
+    <meta name="google-signin-client_id"
+        content="602562454170-huurfbbondbilqamck6a1j0ptcf5b16h.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            const token = googleUser.getAuthResponse().id_token;
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('ID Token: ' + token);
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+
+            const data = new FormData;
+            data.append('token', token)
+            fetch('/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: data
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch(error => console.error(error));
+        }
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+</head>
+
+<body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    </body>
+    <a href="#" onclick="signOut();">Sign out</a>
+</body>
+
 </html>
