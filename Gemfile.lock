@@ -1,6 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    google-id-token (1.4.2)
+      jwt (>= 1)
+    jwt (2.2.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.2)
@@ -18,6 +21,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  google-id-token
   sinatra
 
 BUNDLED WITH
