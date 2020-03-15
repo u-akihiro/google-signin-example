@@ -15,6 +15,6 @@ post '/verify' do
       payload = validator.check(token, ENV['CLIENT_ID'])
       payload.to_json
     rescue GoogleIDToken::ValidationError => e
-      report "Cannot validate: #{e}"
+      "Cannot validate: #{e}"
     end
 end
