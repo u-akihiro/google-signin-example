@@ -10,6 +10,7 @@ post '/verify' do
     content_type :json
 
     token = params[:token]
+    puts token
     validator = GoogleIDToken::Validator.new
     begin
       payload = validator.check(token, ENV['CLIENT_ID'])
