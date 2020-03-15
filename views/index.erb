@@ -18,8 +18,10 @@
                     },
                     body: {'token': googleUser.getAuthResponse().id_token}
                 }).then((response) => {
-                    console.log(response.json());
-                });
+                    return response.json();
+                }).then((data) => {
+                    console.log(data);
+                }).catch(error => console.error(error));
             }
         </script>
     </head>
